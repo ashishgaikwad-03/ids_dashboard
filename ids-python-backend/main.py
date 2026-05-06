@@ -411,7 +411,7 @@ class TSharkCapture:
             return
 
         self._loop = loop
-        self._interface = interface or "4"  # Default to Wi-Fi (interface 4)
+        self._interface = interface or "5"  # Default to Wi-Fi (interface 5)
         self._running = True
         self._packet_count = 0
         self._attack_count = 0
@@ -456,7 +456,7 @@ async def lifespan(app: FastAPI):
     loop = asyncio.get_event_loop()
     # Auto-start capture on launch
     try:
-        capture.start(loop, interface="4")  # Wi-Fi by default
+        capture.start(loop, interface="5")  # Wi-Fi (Realtek RTL8852BE)
     except Exception as e:
         print(f"[IDS] Auto-start failed: {e}")
         print("[IDS] Use POST /api/capture/start to start manually")
@@ -495,7 +495,7 @@ async def websocket_endpoint(websocket: WebSocket):
 #  Capture Control (Start/Stop) 
 @app.post("/api/capture/start")
 @app.post("/api/simulation/start")
-async def start_capture(interface: str = Query("4", description="TShark interface number")):
+async def start_capture(interface: str = Query("5", description="TShark interface number")):
     if capture.is_running:
         return {"status": "already_running", "interface": interface}
     loop = asyncio.get_event_loop()

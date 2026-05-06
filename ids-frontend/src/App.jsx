@@ -81,7 +81,7 @@ function IdsApp({ setIsAuthenticated }) {
     } else {
       // ── START ────────────────────────────────────────────────────────
       try {
-        await fetch(`${API_BASE}/api/capture/start?interface=4`, { method: 'POST' });
+        await fetch(`${API_BASE}/api/capture/start?interface=5`, { method: 'POST' });
       } catch (_) { }
       setSimRunning(true);
     }
